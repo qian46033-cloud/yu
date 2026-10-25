@@ -29,33 +29,62 @@ export default function App() {
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const currentIndex = PAGE_ORDER.indexOf(currentPage);
+  const [showAudioPrompt, setShowAudioPrompt] = useState<boolean>(false);
 
-  // Auto-play music on entry or on first gesture if restricted by browser policy
+  // Auto-play music on entry with WeChat JSBridge support and multi-gesture fallback
   useEffect(() => {
-    const playMusic = async () => {
-      if (audioRef.current) {
-        try {
-          audioRef.current.volume = 0.5;
-          await audioRef.current.play();
-          setIsMusicPlaying(true);
-        } catch {
-          // Autoplay blocked by browser policy without gesture; wait for first interaction
-          setIsMusicPlaying(false);
-          const handleFirstInteraction = () => {
-            if (audioRef.current) {
-              audioRef.current.volume = 0.5;
-              audioRef.current.play().then(() => setIsMusicPlaying(true)).catch(() => {});
-            }
-            window.removeEventListener('pointerdown', handleFirstInteraction);
-            window.removeEventListener('keydown', handleFirstInteraction);
-          };
-          window.addEventListener('pointerdown', handleFirstInteraction, { once: true });
-          window.addEventListener('keydown', handleFirstInteraction, { once: true });
-        }
+    let played = false;
+
+    const startPlayback = async () => {
+      if (played || !audioRef.current) return;
+      try {
+        audioRef.current.volume = 0.55;
+        await audioRef.current.play();
+        setIsMusicPlaying(true);
+        setShowAudioPrompt(false);
+        played = true;
+      } catch {
+        // Autoplay blocked by browser policy without user gesture
+        setIsMusicPlaying(false);
+        setShowAudioPrompt(true);
       }
     };
 
-    playMusic();
+    // Attempt direct play
+    startPlayback();
+
+    // WeChat In-App Browser JSBridge hook (crucial for users in China / WeChat)
+    const handleWechatReady = () => {
+      startPlayback();
+    };
+    if (typeof (window as unknown as { WeixinJSBridge?: unknown }).WeixinJSBridge === 'object') {
+      startPlayback();
+    } else {
+      document.addEventListener('WeixinJSBridgeReady', handleWechatReady, false);
+    }
+
+    // Touch & pointer interaction fallback across the entire window
+    const handleAnyGesture = () => {
+      startPlayback();
+      cleanupListeners();
+    };
+
+    const cleanupListeners = () => {
+      window.removeEventListener('pointerdown', handleAnyGesture);
+      window.removeEventListener('touchstart', handleAnyGesture);
+      window.removeEventListener('click', handleAnyGesture);
+      window.removeEventListener('keydown', handleAnyGesture);
+      document.removeEventListener('WeixinJSBridgeReady', handleWechatReady);
+    };
+
+    window.addEventListener('pointerdown', handleAnyGesture, { passive: true });
+    window.addEventListener('touchstart', handleAnyGesture, { passive: true });
+    window.addEventListener('click', handleAnyGesture, { passive: true });
+    window.addEventListener('keydown', handleAnyGesture, { passive: true });
+
+    return () => {
+      cleanupListeners();
+    };
   }, []);
 
   const handleToggleMusic = () => {
@@ -64,7 +93,11 @@ export default function App() {
         audioRef.current.pause();
         setIsMusicPlaying(false);
       } else {
-        audioRef.current.play().then(() => setIsMusicPlaying(true)).catch(() => {});
+        audioRef.current.volume = 0.55;
+        audioRef.current.play().then(() => {
+          setIsMusicPlaying(true);
+          setShowAudioPrompt(false);
+        }).catch(() => {});
       }
     }
   };
@@ -301,6 +334,7 @@ export default function App() {
         isPlaying={isMusicPlaying}
         onTogglePlay={handleToggleMusic}
         audioRef={audioRef}
+        showPrompt={showAudioPrompt}
       />
 
       {/* Gothic Clean Footer */}

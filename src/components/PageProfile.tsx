@@ -3,6 +3,7 @@ import { PERSONAL_INFO } from '../data/content';
 import { PageId } from '../types';
 import { ExternalLink, Copy, Check, ArrowRight, ShieldCheck, HeartHandshake, Compass, ScrollText, ZoomIn, X } from 'lucide-react';
 import { gothicAudio } from '../utils/audio';
+import { GothicImage } from './GothicImage';
 
 interface PageProfileProps {
   onNavigate: (page: PageId) => void;
@@ -55,7 +56,7 @@ export const PageProfile: React.FC<PageProfileProps> = ({ onNavigate }) => {
             className="relative w-full max-w-md aspect-[3/4] rounded-2xl overflow-hidden gothic-border bg-zinc-950 p-2 shadow-2xl shadow-rose-950/20 group cursor-pointer"
           >
             <div className="relative w-full h-full rounded-xl overflow-hidden border border-zinc-800 bg-black">
-              <img
+              <GothicImage
                 src="./assets/aistudio/1060_f7341007.jpeg"
                 alt="yu｜知薇 门牌工作证"
                 className="w-full h-full object-cover object-center transform transition-transform duration-700 group-hover:scale-105"
@@ -213,7 +214,7 @@ export const PageProfile: React.FC<PageProfileProps> = ({ onNavigate }) => {
               </button>
             </div>
             <div className="overflow-auto max-h-[calc(92vh-65px)] flex items-center justify-center p-3 bg-black">
-              <img
+              <GothicImage
                 src="./assets/aistudio/1060_f7341007.jpeg"
                 alt="yu ｜ 知薇 个人门牌卡"
                 className="max-w-full max-h-[82vh] object-contain rounded-lg"

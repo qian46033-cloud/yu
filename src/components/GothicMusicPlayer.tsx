@@ -6,12 +6,14 @@ interface GothicMusicPlayerProps {
   isPlaying: boolean;
   onTogglePlay: () => void;
   audioRef: React.RefObject<HTMLAudioElement | null>;
+  showPrompt?: boolean;
 }
 
 export const GothicMusicPlayer: React.FC<GothicMusicPlayerProps> = ({
   isPlaying,
   onTogglePlay,
   audioRef,
+  showPrompt = false,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -48,14 +50,29 @@ export const GothicMusicPlayer: React.FC<GothicMusicPlayerProps> = ({
   };
 
   return (
-    <div className="fixed bottom-5 left-5 z-40 select-none">
+    <div className="fixed bottom-4 left-4 sm:bottom-5 sm:left-5 z-40 select-none">
       <audio
         ref={audioRef}
         src="./audio/intro_max.mp3"
         preload="auto"
         loop
+        playsInline
         onTimeUpdate={handleTimeUpdate}
       />
+
+      {/* Floating Prompt Toast if autoplay was blocked by mobile browser */}
+      {showPrompt && !isPlaying && !isExpanded && (
+        <div
+          onClick={() => {
+            gothicAudio.playClickChime();
+            onTogglePlay();
+          }}
+          className="absolute -top-11 left-0 whitespace-nowrap bg-gradient-to-r from-rose-950/90 to-zinc-950/90 border border-rose-600/80 text-rose-200 text-[11px] font-serif-sc px-3 py-1.5 rounded-full shadow-lg shadow-rose-950/50 backdrop-blur-md flex items-center gap-1.5 cursor-pointer animate-bounce hover:scale-105 transition-transform"
+        >
+          <span className="text-rose-400 font-cinzel">♱</span>
+          <span>点击开启《Intro(Max)》背景原声</span>
+        </div>
+      )}
 
       {/* Expanded Widget */}
       {isExpanded ? (
@@ -169,13 +186,13 @@ export const GothicMusicPlayer: React.FC<GothicMusicPlayerProps> = ({
           </div>
 
           {/* Song text preview */}
-          <div className="hidden sm:flex flex-col pr-2">
-            <span className="text-[11px] font-bold text-zinc-200 font-serif-sc tracking-wide leading-tight">
-              希先森 · Intro(Max)
+          <div className="flex flex-col pr-1 sm:pr-2">
+            <span className="text-[10px] sm:text-[11px] font-bold text-zinc-200 font-serif-sc tracking-wide leading-tight">
+              {isPlaying ? '希先森 · Intro(Max)' : '点击播放《Intro(Max)》'}
             </span>
-            <span className="text-[9px] text-rose-400/80 font-serif-sc flex items-center gap-1">
-              <span>{isPlaying ? '播放中' : '已暂停'}</span>
-              <span>· 点击展开</span>
+            <span className="text-[8px] sm:text-[9px] text-rose-400/90 font-serif-sc flex items-center gap-1">
+              <span>{isPlaying ? '正在播放' : '点此启播原声'}</span>
+              <span className="hidden sm:inline">· 点击展开</span>
             </span>
           </div>
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { OPERATIONS_DOC } from '../data/content';
 import { ExternalLink, Copy, Check, FileSpreadsheet, Sparkles, BookOpen, Image as ImageIcon, ZoomIn, X } from 'lucide-react';
 import { gothicAudio } from '../utils/audio';
+import { GothicImage } from './GothicImage';
 
 export const PageOperations: React.FC = () => {
   const [copied, setCopied] = useState(false);
@@ -126,7 +127,7 @@ export const PageOperations: React.FC = () => {
               className="group relative rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950 cursor-pointer hover:border-rose-800/80 transition-all shadow-lg shadow-black/40"
             >
               <div className="aspect-[4/3] w-full overflow-hidden bg-black flex items-center justify-center">
-                <img
+                <GothicImage
                   src="./assets/aistudio/1056_426303a7.jpeg"
                   alt="运营流水收款凭证一"
                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-103"
@@ -153,7 +154,7 @@ export const PageOperations: React.FC = () => {
               className="group relative rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950 cursor-pointer hover:border-rose-800/80 transition-all shadow-lg shadow-black/40"
             >
               <div className="aspect-[4/3] w-full overflow-hidden bg-black flex items-center justify-center">
-                <img
+                <GothicImage
                   src="./assets/aistudio/1057_6278ecca.jpeg"
                   alt="运营流水收款凭证二"
                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-103"
@@ -199,7 +200,7 @@ export const PageOperations: React.FC = () => {
               </button>
             </div>
             <div className="overflow-auto max-h-[calc(92vh-65px)] flex items-center justify-center p-3 bg-black">
-              <img
+              <GothicImage
                 src={lightboxImage.src}
                 alt={lightboxImage.title}
                 className="max-w-full max-h-[82vh] object-contain rounded-lg"

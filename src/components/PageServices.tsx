@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { SERVICE_SECTIONS } from '../data/content';
 import { ExternalLink, Check, Copy, ShieldAlert, Sparkles, Image as ImageIcon, ZoomIn, X, FileCode } from 'lucide-react';
 import { gothicAudio } from '../utils/audio';
+import { GothicImage } from './GothicImage';
 
 export const PageServices: React.FC = () => {
   const [activeFilter, setActiveFilter] = useState<string>('all');
@@ -206,7 +207,7 @@ export const PageServices: React.FC = () => {
                   className="group relative rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950 cursor-pointer hover:border-rose-800/80 transition-all shadow-lg shadow-black/40"
                 >
                   <div className="aspect-[4/3] w-full overflow-hidden bg-black/60 flex items-center justify-center">
-                    <img
+                    <GothicImage
                       src="./assets/aistudio/1058_eeb136ac.jpeg"
                       alt="单贴阅读量实测数据"
                       className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
@@ -233,7 +234,7 @@ export const PageServices: React.FC = () => {
                   className="group relative rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950 cursor-pointer hover:border-rose-800/80 transition-all shadow-lg shadow-black/40"
                 >
                   <div className="aspect-[4/3] w-full overflow-hidden bg-black/60 flex items-center justify-center">
-                    <img
+                    <GothicImage
                       src="./assets/aistudio/1059_c8aad502.jpeg"
                       alt="宣发主页与账号展示"
                       className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
@@ -320,7 +321,7 @@ export const PageServices: React.FC = () => {
                 className="group relative rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950 max-w-xl mx-auto cursor-pointer hover:border-rose-800/80 transition-all shadow-xl shadow-black/50"
               >
                 <div className="w-full max-h-[500px] overflow-hidden bg-black flex items-center justify-center">
-                  <img
+                  <GothicImage
                     src="./assets/aistudio/1053_f78bd00c.jpeg"
                     alt="公关专属 个人报价与下单须知"
                     className="w-full object-cover object-top transition-transform duration-500 group-hover:scale-103"
@@ -445,7 +446,7 @@ export const PageServices: React.FC = () => {
                   className="group relative rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950 cursor-pointer hover:border-rose-800/80 transition-all shadow-lg shadow-black/40"
                 >
                   <div className="aspect-[16/9] w-full overflow-hidden bg-black flex items-center justify-center">
-                    <img
+                    <GothicImage
                       src="./assets/aistudio/1054_6201a3ed.jpeg"
                       alt="代码代挂实操长卷一"
                       className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-103"
@@ -472,7 +473,7 @@ export const PageServices: React.FC = () => {
                   className="group relative rounded-xl overflow-hidden border border-zinc-800 bg-zinc-950 cursor-pointer hover:border-rose-800/80 transition-all shadow-lg shadow-black/40"
                 >
                   <div className="aspect-[16/9] w-full overflow-hidden bg-black flex items-center justify-center">
-                    <img
+                    <GothicImage
                       src="./assets/aistudio/1055_630602f3.jpeg"
                       alt="代码代挂实操长卷二"
                       className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-103"
@@ -642,7 +643,7 @@ export const PageServices: React.FC = () => {
               </button>
             </div>
             <div className="overflow-auto max-h-[calc(92vh-65px)] flex items-center justify-center p-3 bg-black">
-              <img
+              <GothicImage
                 src={lightboxImage.src}
                 alt={lightboxImage.title}
                 className="max-w-full max-h-[82vh] object-contain rounded-lg"
