@@ -1,0 +1,138 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --gothic-bg: #070709;
+    --gothic-card: #0d0d12;
+    --gothic-border: rgba(255, 255, 255, 0.08);
+    --gothic-crimson: #881337;
+    --gothic-gold: #c5a059;
+    --gothic-silver: #a1a1aa;
+  }
+
+  body {
+    background-color: #060608;
+    color: #e4e4e7;
+    font-family: 'Noto Serif SC', 'Cormorant Garamond', -apple-system, serif;
+    overflow-x: hidden;
+  }
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
+.font-gothic {
+  font-family: 'Cormorant Garamond', 'Noto Serif SC', serif;
+}
+
+.font-serif-sc {
+  font-family: 'Noto Serif SC', serif;
+}
+
+/* Custom dark gothic scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4c0519;
+}
+
+/* Gothic decorative frame borders */
+.gothic-border {
+  border: 1px solid rgba(228, 228, 231, 0.12);
+  position: relative;
+}
+
+.gothic-border::before,
+.gothic-border::after {
+  content: '✦';
+  position: absolute;
+  font-size: 8px;
+  color: rgba(244, 63, 94, 0.6);
+  line-height: 1;
+}
+
+.gothic-border::before {
+  top: -4px;
+  left: -4px;
+}
+
+.gothic-border::after {
+  bottom: -4px;
+  right: -4px;
+}
+
+/* Noise overlay */
+.bg-vignette {
+  background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(3, 3, 5, 0.85) 100%);
+}
+
+/* Subtle candle/ember float */
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(-120px) rotate(45deg);
+    opacity: 0;
+  }
+}
+
+.animate-float-particle {
+  animation: floatUp 4s ease-in-out infinite;
+}
+
+@keyframes floatGothic {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(0.9);
+    opacity: 0;
+  }
+  15% {
+    opacity: var(--tw-opacity, 0.4);
+  }
+  85% {
+    opacity: var(--tw-opacity, 0.4);
+  }
+  100% {
+    transform: translateY(-110vh) rotate(360deg) scale(1.1);
+    opacity: 0;
+  }
+}
+
+.animate-float-gothic {
+  animation: floatGothic linear infinite;
+}
+
+/* Gothic ornate filigree header divider */
+.gothic-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: rgba(244, 63, 94, 0.6);
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+}
+
+.gothic-divider::before,
+.gothic-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(244, 63, 94, 0.3), transparent);
+}
+

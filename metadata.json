@@ -1,0 +1,6 @@
+{
+  "name": "yu｜知薇 · 哥特档案与接单门牌",
+  "description": "yu｜知薇暗黑哥特风个人门牌与业务展示录，包含个人信息、微博直通、管理/代宣/公关/代挂/策划接单价格及运营详情。",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
